@@ -1,12 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#include <stdlib.h>
+/* =================== Headers =================== */
+#include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <errno.h>
 
+extern char **opcodeAndVal;
+
+/* ====================== Structures ============================= */
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -19,7 +23,7 @@ typedef struct stack_s
 {
 	int n;
 	struct stack_s *prev;
-	struct stack_st *next;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -29,11 +33,33 @@ typedef struct stack_s
  *
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
-*/
+ */
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* ++++++ Helper functions +++++ */
+
+/* functions for handling and manipulating files */
+FILE *openFile(char *fileName, char *mode);
+void readFileLine(char **line, size_t *bufSize, FILE *fileName);
+
+/* functions for dynamic memory allocation */
+char **reallocateMem(char **ptr, size_t size);
+void *allocateMem(size_t size);
+
+/* functions that handle tokenisation of strings */
+char **createTokensFromString(char *str);
+void printArrayOfPointers(char **arrayOfPointers);
+void freeArrayOfPointers(char **arrayOfPointers);
+size_t countPointerArrayVals(char **arrayOfPointers);
+
+
+
+/* ++++++ Main Stack Function Prototypes ++++++++ */
+void pushInt(stack_t **stack, unsigned int line_number);
+void printAll(stack_t **stack, unsigned int line_number);
 
 #endif
