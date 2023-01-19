@@ -1,6 +1,8 @@
 #include "monty.h"
 #include <fcntl.h>
 
+char **opcodeAndVal;
+
 /**
  * main - Entry Point
  * @argc: number of command line arguments
@@ -9,10 +11,11 @@
  */
 int main(int argc, char **argv)
 {
-	char **opcodeAndVal, *p_Line;
+	char *p_Line;
 	FILE *p_File;
 	unsigned int line_number = 0;
 	size_t bufSize = 32;
+	stack_t *myStack = NULL;
 
 	if (argc != 2)
 	{
@@ -25,9 +28,8 @@ int main(int argc, char **argv)
 	line_number++;
 	while (!feof(p_File) && p_File != NULL)
 	{
-		printf("line %u: %s", line_number, p_Line);
 		opcodeAndVal = createTokensFromString(p_Line);
-		printArrayOfPointers(opcodeAndVal);
+		callOpcodeFuncs(&myStack, line_number);
 		readFileLine(&p_Line, &bufSize, p_File);
 		line_number++;
 	}

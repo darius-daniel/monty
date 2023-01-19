@@ -56,10 +56,13 @@ void printArrayOfPointers(char **arrayOfPointers);
 void freeArrayOfPointers(char **arrayOfPointers);
 size_t countPointerArrayVals(char **arrayOfPointers);
 
-
+/* Handling the stack operations */
+void callOpcodeFuncs(stack_t **stack, unsigned int line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, unsigned int line_number);
 void printAll(stack_t **stack, unsigned int line_number);
+void printInt(stack_t **stack, unsigned int line_number);
+void popInt(stack_t **stack, unsigned int line_number);
 
 #endif
