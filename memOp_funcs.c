@@ -10,13 +10,7 @@
 */
 char **reallocateMem(char **ptr, size_t size)
 {
-	void *newBlock = (char **)malloc(size * sizeof(char *));
-
-	if (newBlock == NULL)
-	{
-		fprintf(stderr, "malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+	void *newBlock = allocateMem(size * sizeof(char *));
 
 	memcpy(newBlock, ptr, (size - 1) * sizeof(char *));
 

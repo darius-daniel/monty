@@ -2,6 +2,7 @@
 #define MONTY_H
 
 /* =================== Headers =================== */
+#include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,11 +56,10 @@ void *allocateMem(size_t size);
 char **createTokensFromString(char *str);
 void printArrayOfPointers(char **arrayOfPointers);
 void freeArrayOfPointers(char **arrayOfPointers);
-size_t countPointerArrayVals(char **arrayOfPointers);
+int isBlank (char const *line);
 
 /* Handling the stack operations */
 void callOpcodeFuncs(stack_t **stack, unsigned int line_number);
-int checkFormat(char **arrayOfPointers, unsigned int line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, unsigned int line_number);

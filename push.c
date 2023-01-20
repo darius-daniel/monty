@@ -11,7 +11,7 @@ void pushInt(stack_t **stack, unsigned int line_number)
 	char *end_ptr;
 	int num;
 
-	if (countPointerArrayVals(opcodeAndVal) > 1)
+	if (opcodeAndVal[1] != NULL)
 	{
 		end_ptr = allocateMem(sizeof(char) * (strlen(opcodeAndVal[1]) + 1));
 		num = strtol(opcodeAndVal[1], &end_ptr, 10);

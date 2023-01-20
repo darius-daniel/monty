@@ -1,10 +1,8 @@
 push 1
 push 138273
 push -219832
-pall
+pint
 pop
-pall
+pint
 pop
-pall
-pop
-pall
+pint

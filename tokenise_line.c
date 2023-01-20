@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <ctype.h>
 
 /**
  * createTokensFromString - creates tokens from a string by
@@ -11,12 +12,13 @@
 */
 char **createTokensFromString(char *str)
 {
-	char **arrayOfTokens, *token;
-	char *delimiters = " \t\n ";
-	unsigned int i = 0;
-	size_t size = 1;
+	char **arrayOfTokens;
+	char *token;
+	char *delimiters = " \t\n";
+	size_t size = 2;
+	int i = 0;
 
-	arrayOfTokens = (char **)malloc(size * sizeof(char *));
+	arrayOfTokens = malloc(size * sizeof(char *));
 	if (arrayOfTokens == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -24,16 +26,12 @@ char **createTokensFromString(char *str)
 	}
 
 	token = strtok(str, delimiters);
-	while (token != NULL)
+	while (token != NULL && i < 2)
 	{
 		arrayOfTokens[i] = strdup(token);
-
-		size++;
-		arrayOfTokens = reallocateMem(arrayOfTokens, size);
 		token = strtok(NULL, delimiters);
 		i++;
 	}
-
 	return (arrayOfTokens);
 }
 
@@ -73,19 +71,4 @@ void freeArrayOfPointers(char **arrayOfPointers)
 		}
 		free(arrayOfPointers);
 	}
-}
-
-/**
- * countPointerArrayVals - counts the contents of an array of pointers
- * @arrayOfPointers: the array of pointers
- * Return: number of elements in the array
- */
-size_t countPointerArrayVals(char **arrayOfPointers)
-{
-	unsigned int valNum = 0, i;
-
-	for (i = 0; arrayOfPointers[i] != NULL; i++)
-		valNum++;
-
-	return (valNum);
 }

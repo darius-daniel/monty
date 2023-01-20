@@ -42,4 +42,3 @@ void readFileLine(char **line, size_t *size, FILE *fileName)
 		}
 	}
 }
-
