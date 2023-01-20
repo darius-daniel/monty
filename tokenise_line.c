@@ -33,6 +33,7 @@ char **createTokensFromString(char *str)
 		token = strtok(NULL, delimiters);
 		i++;
 	}
+
 	return (arrayOfTokens);
 }
 

@@ -9,8 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-extern char **opcodeAndVal;
+#include <fcntl.h>
 
 /* ====================== Structures ============================= */
 /**
@@ -42,6 +41,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern char **opcodeAndVal;
+
 /* ++++++ Helper functions +++++ */
 
 /* functions for handling and manipulating files */
@@ -60,6 +61,7 @@ size_t countPointerArrayVals(char **arrayOfPointers);
 
 /* Handling the stack operations */
 void callOpcodeFuncs(stack_t **stack, unsigned int line_number);
+int checkFormat(char **arrayOfPointers, unsigned int line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, unsigned int line_number);
