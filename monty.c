@@ -9,7 +9,6 @@ char **opcodeAndVal;
  */
 int main(int argc, char **argv)
 {
-	char **opcodeAndVal;
 	char *p_Line;
 	FILE *p_File;
 	unsigned int line_number = 0;
