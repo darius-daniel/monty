@@ -1,5 +1,6 @@
 #include "monty.h"
 
+char **opcodeAndVal;
 /**
  * main - Entry Point
  * @argc: number of command line arguments
