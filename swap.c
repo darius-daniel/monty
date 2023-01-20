@@ -29,4 +29,5 @@ void swapInts(stack_t **stack, unsigned int line_number)
 	second->prev = first->prev;
 	first->prev = second;
 	second->next = first;
+	*stack = second;
 }
