@@ -10,14 +10,9 @@ void pushInt(stack_t **stack, unsigned int line_number)
 	stack_t *new, *current;
 	int num;
 
-	if (opcodeAndVal[1] != NULL)
-		num = atoi(opcodeAndVal[1]);
+	checkFormat(opcodeAndVal, line_number);
 
-	if (opcodeAndVal[1] == NULL || num == 0)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+	num = atoi(opcodeAndVal[1]);
 
 	new = allocateMem(sizeof(stack_t));
 	new->n = num, new->next = new->prev = NULL;
@@ -30,5 +25,37 @@ void pushInt(stack_t **stack, unsigned int line_number)
 		new->next = *stack;
 		current->prev = new;
 		*stack = new;
+	}
+}
+
+
+/**
+ * checkFormat - checks the input format to the function
+ * @arrayOfPointers: opcode and value
+ * @line_number: opcode line number
+*/
+void checkFormat(char **arrayOfPointers, unsigned int line_number)
+{
+	char *num;
+	int i = 0, not_digit = 0;
+
+	if (arrayOfPointers[1] != NULL)
+	{
+		num = arrayOfPointers[1];
+		while (num[i] != '\0')
+		{
+			if (num[i] < 48 || num[i] > 57)
+			{
+				not_digit = 1;
+				break;
+			}
+			i++;
+		}
+	}
+
+	if (opcodeAndVal[1] == NULL || not_digit == 1)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 }

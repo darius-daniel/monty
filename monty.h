@@ -59,6 +59,7 @@ void freeArrayOfPointers(char **arrayOfPointers);
 
 /* Handling the stack operations */
 void callOpcodeFuncs(stack_t **stack, unsigned int line_number);
+void checkFormat(char **arrayOfPointers, unsigned int line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, unsigned int line_number);
