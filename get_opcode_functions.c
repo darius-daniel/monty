@@ -12,7 +12,8 @@ void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
 	int i;
 	instruction_t opcodes[] = {
 		{"push", pushInt}, {"pall", printAll},
-		{"pint", printInt}, {"pop", popInt}
+		{"pint", printInt}, {"pop", popInt},
+		{"swap", swapInts}
 	};
 
 	for (i = 0; opcodes[i].opcode != NULL; i++)
