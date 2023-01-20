@@ -8,16 +8,12 @@
 void pushInt(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new, *current;
-	char *end_ptr;
 	int num;
 
 	if (opcodeAndVal[1] != NULL)
-	{
-		end_ptr = allocateMem(sizeof(char) * (strlen(opcodeAndVal[1]) + 1));
-		num = strtol(opcodeAndVal[1], &end_ptr, 10);
-	}
+		num = atoi(opcodeAndVal[1]);
 
-	if (opcodeAndVal[1] == NULL || *end_ptr != '\0')
+	if (opcodeAndVal[1] == NULL || num == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
