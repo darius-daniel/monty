@@ -37,3 +37,19 @@ void *allocateMem(size_t size)
 
 	return (newBlock);
 }
+
+/**
+ * freeStack - frees the memory occupied by a stack
+ * @stack: pointer to the top of the stack
+*/
+void freeStack(stack_t **stack)
+{
+	stack_t *current = *stack;
+
+	while (current != NULL)
+	{
+		current = current->next;
+		free(current->prev);
+		current->prev = NULL;
+	}
+}

@@ -7,23 +7,30 @@
  */
 void pushInt(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new, *current;
+	stack_t *new;
 	int num;
 
 	checkFormat(opcodeAndVal, line_number);
 
 	num = atoi(opcodeAndVal[1]);
 
-	new = allocateMem(sizeof(stack_t));
-	new->n = num, new->next = *stack, new->prev = NULL;
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		freeStack(stack);
+		exit(EXIT_FAILURE);
+	}
+
+	new->n = num;
+	new->next = *stack;
+	new->prev = NULL;
 
 	if (*stack == NULL)
 		*stack = new;
 	else
 	{
-		current = *stack;
-		new->next = *stack;
-		current->prev = new;
+		(*stack)->prev = new;
 		*stack = new;
 	}
 }

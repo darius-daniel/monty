@@ -56,6 +56,7 @@ void *allocateMem(size_t size);
 char **createTokensFromString(char *str);
 void printArrayOfPointers(char **arrayOfPointers);
 void freeArrayOfPointers(char **arrayOfPointers);
+void freeStack(stack_t **stack);
 
 /* Handling the stack operations */
 void callOpcodeFuncs(stack_t **stack, unsigned int line_number);
