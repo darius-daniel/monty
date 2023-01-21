@@ -15,7 +15,7 @@ void pushInt(stack_t **stack, unsigned int line_number)
 	num = atoi(opcodeAndVal[1]);
 
 	new = allocateMem(sizeof(stack_t));
-	new->n = num, new->next = new->prev = NULL;
+	new->n = num, new->next = *stack, new->prev = NULL;
 
 	if (*stack == NULL)
 		*stack = new;

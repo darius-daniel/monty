@@ -67,5 +67,6 @@ void printAll(stack_t **stack, unsigned int line_number);
 void printInt(stack_t **stack, unsigned int line_number);
 void popInt(stack_t **stack, unsigned int line_number);
 void swapInts(stack_t **stack, unsigned int line_number);
+void addInts(stack_t **stack, unsigned int line_number);
 
 #endif
