@@ -13,7 +13,7 @@ void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
 	instruction_t opcodes[] = {
 		{"push", pushInt}, {"pall", printAll},
 		{"pint", printInt}, {"pop", popInt},
-		{"swap", swapInts}
+		{"swap", swapInts}, {"add", addInts},
 	};
 
 	for (i = 0; opcodes[i].opcode != NULL; i++)
@@ -29,6 +29,7 @@ void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n",
 					line_number, opcodeAndVal[0]);
+		freeStack(stack);
 		exit(EXIT_FAILURE);
 	}
 }

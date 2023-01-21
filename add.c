@@ -8,7 +8,7 @@
 void addInts(stack_t **stack, unsigned int line_number)
 {
 	size_t num_of_stack_elements = 0;
-	stack_t *current;
+	stack_t *current, *next;
 
 	current = *stack;
 	while (current != NULL)
@@ -19,7 +19,13 @@ void addInts(stack_t **stack, unsigned int line_number)
 
 	if (num_of_stack_elements < 2)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short", line_number);
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+
+	current = *stack;
+	next = current->next;
+	next->n = next->n + current->n;
+	*stack = next;
+	free(next->prev);
 }
