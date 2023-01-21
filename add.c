@@ -27,5 +27,6 @@ void addInts(stack_t **stack, unsigned int line_number)
 	next = current->next;
 	next->n = next->n + current->n;
 	*stack = next;
-	free(next->prev);
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }
