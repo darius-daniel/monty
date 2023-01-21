@@ -36,15 +36,15 @@ void pushInt(stack_t **stack, unsigned int line_number)
 */
 void checkFormat(char **arrayOfPointers, unsigned int line_number)
 {
-	char *num;
+	char *str_num;
 	int i = 0, not_digit = 0;
 
 	if (arrayOfPointers[1] != NULL)
 	{
-		num = arrayOfPointers[1];
-		while (num[i] != '\0')
+		str_num = arrayOfPointers[1];
+		while (str_num[i] != '\0')
 		{
-			if (num[i] < 48 || num[i] > 57)
+			if (str_num[i] < 48 || str_num[i] > 57)
 			{
 				not_digit = 1;
 				break;
