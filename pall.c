@@ -6,10 +6,11 @@
  * @line_number: line number of the stack
  */
 void
-printAll(stack_t **stack, uInt line_number __attribute__((unused)))
+printAll(stack_t **stack, uInt line_number)
 {
 	stack_t *current;
 
+	(void) line_number;
 	if (*stack != NULL)
 	{
 		current = *stack;

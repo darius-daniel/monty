@@ -9,6 +9,7 @@ void modInts(stack_t **stack, uInt line_number)
 {
 	size_t num_of_stack_elements = 0;
 	stack_t *current, *next;
+	int mod;
 
 	current = *stack;
 	while (current != NULL)
@@ -17,24 +18,22 @@ void modInts(stack_t **stack, uInt line_number)
 		current = current->next;
 	}
 
-	if (num_of_stack_elements < 2)
+	if (num_of_stack_elements < 2 || (*stack)->n == 0)
 	{
-		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		if (num_of_stack_elements < 2)
+			fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		else if ((*stack)->n == 0)
+			fprintf(stderr, "L%d: division by zero\n", line_number);
+
 		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 
-	if ((*stack)->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", line_number);
-		freeGroup(&var_group);
-		exit(EXIT_FAILURE);
-	}
+	next = (*stack)->next;
+	mod = next->n % (*stack)->n;
 
-	current = *stack;
-	next = current->next;
-	next->n = next->n % current->n;
-	*stack = next;
+	*stack = (*stack)->next;
+	(*stack)->n = mod;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }

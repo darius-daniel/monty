@@ -8,21 +8,19 @@
 void pushInt(stack_t **stack, uInt line_number)
 {
 	stack_t *new;
-	int num;
 
 	checkFormat(var_group, line_number);
-
-	num = atoi(var_group->arg);
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		freeStack(&var_group->stack);
 		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 
-	new->n = num;
+	new->n = atoi(var_group->arg);
 	new->next = *stack;
 	new->prev = NULL;
 
@@ -45,14 +43,18 @@ void pushInt(stack_t **stack, uInt line_number)
 void checkFormat(GLOBALS *group, uInt line_number)
 {
 	char *str_num;
-	int i = 0, not_digit = 0;
+	int i, not_digit = 0;
 
 	str_num = group->arg;
 	if (str_num != NULL)
 	{
+		if (str_num[0] == '-')
+			i = 1;
+		else
+			i = 0;
 		while (str_num[i] != '\0')
 		{
-			if (str_num[i] < '0' || str_num[i] > '9')
+			if ((str_num[i] < '0' || str_num[i] > '9'))
 			{
 				not_digit = 1;
 				break;

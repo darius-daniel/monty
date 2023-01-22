@@ -7,25 +7,18 @@
 */
 void popInt(stack_t **stack, uInt line_number)
 {
-	stack_t *top = *stack;
-
-	if (top == NULL)
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	if (top->next == NULL)
-	{
-		free(top);
-		top = NULL;
-		*stack = top;
-	}
+	if ((*stack)->next == NULL)
+		free(*stack);
 	else
 	{
-		top = top->next;
-		free(top->prev);
-		top->prev = NULL;
-		*stack = top;
+		*stack = (*stack)->next;
+		free((*stack)->prev);
+		(*stack)->prev = NULL;
 	}
 }

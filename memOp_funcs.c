@@ -51,7 +51,7 @@ void freeStack(stack_t **stack)
 	{
 		current = current->next;
 		free(current->prev);
-		current->prev = NULL;
+		*stack = current;
 	}
 }
 
