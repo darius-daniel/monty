@@ -82,15 +82,23 @@ void addToQueue(stack_t **head, const int n)
 */
 void checkFormat(GLOBALS *group, uInt line_number)
 {
-	int i, not_digit = 0;
+	int i = 0, not_digit = 0;
 
 	if (!group->arg)
 		not_digit = 1;
+	else if (strlen(group->arg) == 1)
+	{
+		if (!isdigit(group->arg[0]) && group->arg[0] != '-' && group->arg[0] != '+')
+			i = 0;
+		else
+			i = 1;
+	}
 
-	for (i = 0; group->arg[i] != '\0'; i++)
+	while (group->arg[i] != '\0')
 	{
 		if (!isdigit(group->arg[i]) && group->arg[i] != '-')
 			not_digit = 1;
+		i++;
 	}
 
 	if (not_digit == 1)
