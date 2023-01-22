@@ -43,25 +43,38 @@ void pushInt(stack_t **stack, uInt line_number)
 void checkFormat(GLOBALS *group, uInt line_number)
 {
 	char *str_num;
-	int i, not_digit = 0;
+	int i, not_digit;
 
-	str_num = group->arg;
+	str_num = strdup(group->arg);
 	if (str_num != NULL)
 	{
-		if (str_num[0] == '-')
-			i = 1;
-		else
-			i = 0;
-		while (str_num[i] != '\0')
+		if (strlen(group->arg) == 1)
 		{
-			if ((str_num[i] < '0' || str_num[i] > '9'))
-			{
+			if (group->arg[0] < '0' || group->arg[0] > '9')
 				not_digit = 1;
-				break;
+		}
+		else
+		{
+			if (str_num[0] == '-' || str_num[0] == '+')
+				i = 1;
+			else
+				i = 0;
+			while (str_num[i] != '\0')
+			{
+				if ((str_num[i] < '0' || str_num[i] > '9'))
+				{
+					if (str_num[i] == '.')
+						strncpy(group->arg, str_num, i + i);
+					else
+						not_digit = 1;
+					break;
+				}
+				i++;
 			}
-			i++;
 		}
 	}
+
+	free(str_num);
 
 	if (str_num == NULL || not_digit == 1)
 	{
