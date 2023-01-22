@@ -6,7 +6,7 @@
  * @line_number: line number of the stack
  */
 void
-printAll(stack_t **stack, unsigned int line_number __attribute__((unused)))
+printAll(stack_t **stack, uInt line_number __attribute__((unused)))
 {
 	stack_t *current;
 

@@ -7,7 +7,7 @@
  * @line_number: the line number
  * Return: Nothing
 */
-void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
+void callOpcodeFuncs(stack_t **stack, uInt line_number)
 {
 	int i;
 	instruction_t opcodes[] = {
@@ -21,7 +21,7 @@ void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
 
 	for (i = 0; opcodes[i].opcode != NULL; i++)
 	{
-		if (strcmp(opcodes[i].opcode, opcodeAndVal[0]) == 0)
+		if (strcmp(opcodes[i].opcode, var_group->opcode) == 0)
 		{
 			opcodes[i].f(stack, line_number);
 			break;
@@ -31,8 +31,8 @@ void callOpcodeFuncs(stack_t **stack, unsigned int line_number)
 	if (opcodes[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n",
-					line_number, opcodeAndVal[0]);
-		freeStack(stack);
+					line_number, var_group->opcode);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 }

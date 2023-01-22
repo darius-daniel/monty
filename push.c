@@ -5,20 +5,20 @@
  * @stack: pointer to the top of the stack
  * @line_number: line number
  */
-void pushInt(stack_t **stack, unsigned int line_number)
+void pushInt(stack_t **stack, uInt line_number)
 {
 	stack_t *new;
 	int num;
 
-	checkFormat(opcodeAndVal, line_number);
+	checkFormat(var_group, line_number);
 
-	num = atoi(opcodeAndVal[1]);
+	num = atoi(var_group->arg);
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		freeStack(stack);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 
@@ -38,17 +38,17 @@ void pushInt(stack_t **stack, unsigned int line_number)
 
 /**
  * checkFormat - checks the input format to the function
- * @arrayOfPointers: opcode and value
  * @line_number: opcode line number
+ * @group: a struct containing a group of global variables
 */
-void checkFormat(char **arrayOfPointers, unsigned int line_number)
+void checkFormat(GLOBALS *group, uInt line_number)
 {
 	char *str_num;
 	int i = 0, not_digit = 0;
 
-	if (arrayOfPointers[1] != NULL)
+	if (group != NULL)
 	{
-		str_num = arrayOfPointers[1];
+		str_num = group->arg;
 		while (str_num[i] != '\0')
 		{
 			if (str_num[i] < 48 || str_num[i] > 57)
@@ -60,9 +60,10 @@ void checkFormat(char **arrayOfPointers, unsigned int line_number)
 		}
 	}
 
-	if (opcodeAndVal[1] == NULL || not_digit == 1)
+	if (group->arg == NULL || not_digit == 1)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 }

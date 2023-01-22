@@ -5,7 +5,7 @@
  * @stack: pointer to the top of the stack
  * @line_number: line number of the opcode in the bytecode file
 */
-void modInts(stack_t **stack, unsigned int line_number)
+void modInts(stack_t **stack, uInt line_number)
 {
 	size_t num_of_stack_elements = 0;
 	stack_t *current, *next;
@@ -20,12 +20,14 @@ void modInts(stack_t **stack, unsigned int line_number)
 	if (num_of_stack_elements < 2)
 	{
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 
 	if ((*stack)->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 

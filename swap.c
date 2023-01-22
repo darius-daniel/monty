@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * swapInt - swaps the top two elements of the stack
+ * swapInts - swaps the top two elements of the stack
  * @stack: pointer to the top of the stack
  * @line_number: an integer
  */
-void swapInts(stack_t **stack, unsigned int line_number)
+void swapInts(stack_t **stack, uInt line_number)
 {
-	unsigned int numStackElems;
+	uInt numStackElems;
 	stack_t *current, *first, *second;
 
 	current = *stack;
@@ -20,6 +20,7 @@ void swapInts(stack_t **stack, unsigned int line_number)
 	if (numStackElems < 2)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
 

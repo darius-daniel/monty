@@ -1,6 +1,6 @@
 #include "monty.h"
 
-char **opcodeAndVal;
+GLOBALS *var_group;
 
 /**
  * main - Entry Point
@@ -10,11 +10,9 @@ char **opcodeAndVal;
  */
 int main(int argc, char **argv)
 {
-	char *p_Line;
-	FILE *p_File;
+	FILE *p_file;
 	unsigned int line_number = 0;
-	size_t bufSize = 32;
-	stack_t *myStack = NULL;
+	size_t buffer_size = 32;
 
 	if (argc != 2)
 	{
@@ -22,19 +20,31 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	p_File = openFile(argv[1], "r");
-	readFileLine(&p_Line, &bufSize, p_File);
+	var_group = allocateMem(sizeof(GLOBALS));
+
+	var_group->line_buffer = NULL;
+	var_group->stack = NULL;
+	var_group->arg = NULL;
+	var_group->opcode = NULL;
+
+	p_file = openFile(argv[1], "r");
+	readFileLine(&var_group->line_buffer, &buffer_size, p_file);
 	line_number++;
-	while (!feof(p_File) && p_File != NULL)
+
+	while (!feof(p_file) && p_file != NULL)
 	{
-		opcodeAndVal = createTokensFromString(p_Line);
-		if (opcodeAndVal[0] != NULL)
-			callOpcodeFuncs(&myStack, line_number);
-		readFileLine(&p_Line, &bufSize, p_File);
+		createTokensFromString(var_group->line_buffer);
+		if (var_group->opcode != NULL)
+		{
+			callOpcodeFuncs(&var_group->stack, line_number);
+			var_group->opcode = NULL;
+			var_group->arg = NULL;
+		}
+		readFileLine(&var_group->line_buffer, &buffer_size, p_file);
 		line_number++;
 	}
 
-	freeArrayOfPointers(opcodeAndVal);
-	fclose(p_File);
+	fclose(p_file);
+	freeGroup(&var_group);
 	return (EXIT_SUCCESS);
 }

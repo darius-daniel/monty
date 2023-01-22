@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <ctype.h>
 
 /**
  * createTokensFromString - creates tokens from a string by
@@ -10,65 +9,22 @@
  *
  * Return: an array of pointers containing the created tokens
 */
-char **createTokensFromString(char *str)
+void createTokensFromString(char *str)
 {
-	char **arrayOfTokens;
 	char *token;
 	char *delimiters = " \t\n";
-	size_t size = 2;
-	int i = 0;
-
-	arrayOfTokens = malloc(size * sizeof(char *));
-	if (arrayOfTokens == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
 
 	token = strtok(str, delimiters);
-	while (token != NULL && i < 2)
+	if (token != NULL)
 	{
-		arrayOfTokens[i] = strdup(token);
-		token = strtok(NULL, delimiters);
-		i++;
+		var_group->opcode = allocateMem(sizeof(char) * (strlen(token) + 1));
+		strcpy(var_group->opcode, token);
 	}
-	return (arrayOfTokens);
-}
 
-/**
- * printArrayOfPointers - prints out the contents of an array of strings
- *
- * @arrayOfPointers: the array of strings
- *
- * Return: Nothing
-*/
-void printArrayOfPointers(char **arrayOfPointers)
-{
-	int i;
-
-	for (i = 0; arrayOfPointers[i] != NULL; i++)
-		printf("arrayOfPointers[%d]: %s\n", i, arrayOfPointers[i]);
-}
-
-/**
- * freeArrayOfPointers - frees the block of memory, on the heap, occupied
- * by an array of tokens
- *
- * @arrayOfPointers: pointer to the block to be freed.
- *
- * Return: Nothing
-*/
-void freeArrayOfPointers(char **arrayOfPointers)
-{
-	unsigned int i = 0;
-
-	if (arrayOfPointers != NULL)
+	token = strtok(NULL, delimiters);
+	if (token != NULL)
 	{
-		while (arrayOfPointers[i] != NULL)
-		{
-			free(arrayOfPointers[i]);
-			i++;
-		}
-		free(arrayOfPointers);
+		var_group->arg = allocateMem(sizeof(char) * (strlen(token) + 1));
+		strcpy(var_group->arg, token);
 	}
 }

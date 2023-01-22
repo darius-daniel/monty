@@ -5,7 +5,7 @@
  * @stack: pointer to the top of the stack
  * @line_number: the line number
 */
-void popInt(stack_t **stack, unsigned int line_number)
+void popInt(stack_t **stack, uInt line_number)
 {
 	stack_t *top = *stack;
 
