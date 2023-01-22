@@ -62,7 +62,10 @@ void checkFormat(GLOBALS *group, uInt line_number)
 			{
 				if ((str_num[i] < '0' || str_num[i] > '9'))
 				{
-					not_digit = 1;
+					if (str_num[i] == '.')
+						strncpy(group->arg, str_num, i + i);
+					else
+						not_digit = 1;
 					break;
 				}
 				i++;
