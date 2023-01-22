@@ -76,7 +76,7 @@ void *allocateMem(size_t size);
 
 /* functions that handle tokenisation of strings */
 void createTokensFromString(char *str);
-void freeStack(stack_t **stack);
+void freeStack(stack_t *stack);
 void freeGroup(GLOBALS **glob_struct);
 
 /* Handling the stack operations */

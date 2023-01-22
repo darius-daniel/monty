@@ -15,7 +15,6 @@ void pushInt(stack_t **stack, uInt line_number)
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		freeStack(&var_group->stack);
 		freeGroup(&var_group);
 		exit(EXIT_FAILURE);
 	}
