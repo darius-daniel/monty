@@ -50,7 +50,7 @@ void checkFormat(GLOBALS *group, uInt line_number)
 		if (strlen(group->arg) == 1)
 		{
 			if (group->arg[0] < '0' || group->arg[0] > '9')
-				not_digit = 1;
+				not_digit = 0;
 		}
 		else
 		{
