@@ -7,28 +7,69 @@
  */
 void pushInt(stack_t **stack, uInt line_number)
 {
-	stack_t *new;
+	int number;
 
 	checkFormat(var_group, line_number);
 
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		freeGroup(&var_group);
-		exit(EXIT_FAILURE);
-	}
+	number = atoi(var_group->arg);
+	addToStack(stack, number);
+}
 
-	new->n = atoi(var_group->arg);
-	new->next = *stack;
+/**
+ * addToStack - adds a new node to a stack-based doubly-linked list
+ * @head: pointer to the head of the dlistint_t list
+ * @n: an integer
+ * Return: Nothing
+ */
+void addToStack(stack_t **head, const int n)
+{
+  stack_t *new;
+  stack_t *current = *head;
+
+  new = allocateMem(sizeof(stack_t));
+
+  new->n = n;
+  new->next = NULL;
+  new->prev = NULL;
+
+  if (current == NULL)
+    *head = new;
+  else
+  {
+    current->prev = new;
+    new->next = current;
+    *head = new;
+  }
+}
+
+/**
+ * addToQueue - adds a new node to a queue-based doubly-linked list
+ * @head: pointer to the head of the dlistint_t list
+ * @n: an integer
+ * Return: Nothing
+ */
+void addToQueue(stack_t **head, const int n)
+{
+	stack_t *new, *current, *previousNode;
+
+	new = allocateMem(sizeof(stack_t));
+
+	new->n = n;
+	new->next = NULL;
 	new->prev = NULL;
-
-	if (*stack == NULL)
-		*stack = new;
+	if (*head == NULL)
+		*head = new;
 	else
 	{
-		(*stack)->prev = new;
-		*stack = new;
+		current = *head;
+		previousNode = NULL;
+		while (current != NULL)
+		{
+			previousNode = current;
+			current = current->next;
+		}
+		previousNode->next = new;
+		new->prev = previousNode;
 	}
 }
 
@@ -41,41 +82,18 @@ void pushInt(stack_t **stack, uInt line_number)
 */
 void checkFormat(GLOBALS *group, uInt line_number)
 {
-	char *str_num;
-	int i, not_digit;
+	int i, not_digit = 0;
 
-	str_num = strdup(group->arg);
-	if (str_num != NULL)
+	if (!group->arg)
+		not_digit = 1;
+
+	for (i = 0; group->arg[i] != '\0'; i++)
 	{
-		if (strlen(group->arg) == 1)
-		{
-			if (group->arg[0] < '0' || group->arg[0] > '9')
-				not_digit = 0;
-		}
-		else
-		{
-			if (str_num[0] == '-' || str_num[0] == '+')
-				i = 1;
-			else
-				i = 0;
-			while (str_num[i] != '\0')
-			{
-				if ((str_num[i] < '0' || str_num[i] > '9'))
-				{
-					if (str_num[i] == '.')
-						strncpy(group->arg, str_num, i + i);
-					else
-						not_digit = 1;
-					break;
-				}
-				i++;
-			}
-		}
+		if (!isdigit(group->arg[i]) && group->arg[i] != '-')
+			not_digit = 1;
 	}
 
-	free(str_num);
-
-	if (str_num == NULL || not_digit == 1)
+	if (not_digit == 1)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		freeGroup(&var_group);

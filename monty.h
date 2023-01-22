@@ -85,6 +85,8 @@ void checkFormat(GLOBALS *group, uInt line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, uInt line_number);
+void addToStack(stack_t **head, const int n);
+void addToQueue(stack_t **head, const int n);
 void printAll(stack_t **stack, uInt line_number);
 void printInt(stack_t **stack,  uInt line_number);
 void popInt(stack_t **stack,  uInt line_number);
