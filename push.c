@@ -23,23 +23,23 @@ void pushInt(stack_t **stack, uInt line_number)
  */
 void addToStack(stack_t **head, const int n)
 {
-  stack_t *new;
-  stack_t *current = *head;
+	stack_t *new;
+	stack_t *current = *head;
 
-  new = allocateMem(sizeof(stack_t));
+	new = allocateMem(sizeof(stack_t));
 
-  new->n = n;
-  new->next = NULL;
-  new->prev = NULL;
+	new->n = n;
+	new->next = NULL;
+	new->prev = NULL;
 
-  if (current == NULL)
-    *head = new;
-  else
-  {
-    current->prev = new;
-    new->next = current;
-    *head = new;
-  }
+	if (current == NULL)
+		*head = new;
+	else
+	{
+		current->prev = new;
+		new->next = current;
+		*head = new;
+	}
 }
 
 /**
@@ -96,7 +96,7 @@ void checkFormat(GLOBALS *group, uInt line_number)
 
 	while (group->arg[i] != '\0')
 	{
-		if (!isdigit(group->arg[i]) && group->arg[i] != '-')
+		if (!isdigit(group->arg[i]))
 			not_digit = 1;
 		i++;
 	}
