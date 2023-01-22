@@ -11,13 +11,10 @@ printAll(stack_t **stack, uInt line_number)
 	stack_t *current;
 
 	(void) line_number;
-	if (*stack != NULL)
+	current = *stack;
+	while (current != NULL)
 	{
-		current = *stack;
-		while (current != NULL)
-		{
-			printf("%d\n", current->n);
-			current = current->next;
-		}
+		printf("%d\n", current->n);
+		current = current->next;
 	}
 }
