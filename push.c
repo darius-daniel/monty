@@ -88,26 +88,17 @@ void checkFormat(GLOBALS *group, uInt line_number)
 		not_digit = 1;
 	else
 	{
-		if (strlen(group->arg) == 1)
+		while (group->arg[i] != '\0')
 		{
-			if (group->arg[0] == '-')
-				not_digit = 1;
-		}
-		else
-		{
-			if (group->arg[0] == '-')
-				i = 1;
-			else
-				i = 0;
-			while (group->arg[i] != '\0')
+			if (group->arg[i] == '-')
 			{
-				if (!isdigit(group->arg[i]))
-				{
-					not_digit = 1;
-					break;
-				}
 				i++;
+				continue;
 			}
+
+			if (*group->arg < 48 || *group->arg > 57)
+				not_digit = 1;
+			i++;
 		}
 	}
 
