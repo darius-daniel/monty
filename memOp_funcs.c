@@ -46,6 +46,7 @@ void *allocateMem(size_t size)
 void freeStack(stack_t **stack)
 {
 	stack_t *current = *stack;
+
 	if (*stack != NULL)
 	{
 		while (current->next != NULL)
@@ -54,7 +55,7 @@ void freeStack(stack_t **stack)
 			free(current->prev);
 		}
 		free(current);
-  }
+	}
 }
 
 /**
