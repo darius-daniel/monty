@@ -90,7 +90,7 @@ void checkFormat(GLOBALS *group, uInt line_number)
 	{
 		while (group->arg[i] != '\0')
 		{
-			if (i == 0 && (group->arg[i] == '-' || group->arg[i] == '+'))
+			if (i == 0 && (group->arg[i] == '-'))
 			{
 				i++;
 				continue;
