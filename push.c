@@ -86,19 +86,29 @@ void checkFormat(GLOBALS *group, uInt line_number)
 
 	if (!group->arg)
 		not_digit = 1;
-	else if (strlen(group->arg) == 1)
+	else
 	{
-		if (!isdigit(group->arg[0]) && group->arg[0] != '-' && group->arg[0] != '+')
-			i = 0;
+		if (strlen(group->arg) == 1)
+		{
+			if (group->arg[0] == '-' || group->arg[0] == '+')
+				not_digit = 1;
+		}
 		else
-			i = 1;
-	}
-
-	while (group->arg[i] != '\0')
-	{
-		if (!isdigit(group->arg[i]))
-			not_digit = 1;
-		i++;
+		{
+			if (group->arg[0] == '-' || group->arg[0] == '+')
+				i = 1;
+			else
+				i = 0;
+			while (group->arg[i] != '\0')
+			{
+				if (!isdigit(group->arg[i]))
+				{
+					not_digit = 1;
+					break;
+				}
+				i++;
+			}
+		}
 	}
 
 	if (not_digit == 1)

@@ -43,14 +43,18 @@ void *allocateMem(size_t size)
  * freeStack - frees the memory occupied by a stack
  * @stack: pointer to the top of the stack
 */
-void freeStack(stack_t *stack)
+void freeStack(stack_t **stack)
 {
-	while (stack != NULL)
+	stack_t *current = *stack;
+	if (*stack != NULL)
 	{
-		stack = stack->next;
-		free(stack->prev);
-	}
-	free(stack);
+		while (current->next != NULL)
+		{
+			current = current->next;
+			free(current->prev);
+		}
+		free(current);
+  }
 }
 
 /**
@@ -62,5 +66,6 @@ void freeGroup(GLOBALS **glob_struct)
 	free((*glob_struct)->line_buffer);
 	free((*glob_struct)->opcode);
 	free((*glob_struct)->arg);
+	freeStack(&var_group->stack);
 	free(*glob_struct);
 }

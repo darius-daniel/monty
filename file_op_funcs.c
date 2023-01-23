@@ -32,6 +32,8 @@ void readFileLine(char **line, size_t *size, FILE *fileName)
 {
 	int numCharRead;
 
+	if (*line != NULL)
+		free(*line);
 	*line = NULL;
 	numCharRead = getline(line, size, fileName);
 	if (numCharRead == -1)

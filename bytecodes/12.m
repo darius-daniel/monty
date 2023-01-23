@@ -1,5 +1,7 @@
 push 20
-pint
 push 1000
 push 1003423435
+push 1284921248-
 pall
+pop
+pint
