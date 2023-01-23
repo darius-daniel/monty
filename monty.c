@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	while (!feof(p_file) && p_file != NULL)
 	{
 		createTokensFromString(var_group->line_buffer);
-		if (var_group->opcode != NULL)
+		if (var_group->opcode != NULL && var_group->opcode[0] != '#')
 		{
 			callOpcodeFuncs(&var_group->stack, line_number);
 			var_group->opcode = NULL;
