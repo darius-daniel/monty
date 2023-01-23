@@ -90,12 +90,12 @@ void checkFormat(GLOBALS *group, uInt line_number)
 	{
 		if (strlen(group->arg) == 1)
 		{
-			if (group->arg[0] == '-' || group->arg[0] == '+')
+			if (group->arg[0] == '-')
 				not_digit = 1;
 		}
 		else
 		{
-			if (group->arg[0] == '-' || group->arg[0] == '+')
+			if (group->arg[0] == '-')
 				i = 1;
 			else
 				i = 0;
