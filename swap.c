@@ -20,8 +20,8 @@ void swapInts(stack_t **stack, uInt line_number)
 
 	if (numStackElems < 2)
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 		freeGlobals();
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 

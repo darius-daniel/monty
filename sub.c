@@ -19,8 +19,8 @@ void subInts(stack_t **stack, uInt line_number)
 
 	if (num_of_stack_elements < 2)
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		freeGlobals();
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 

@@ -20,12 +20,13 @@ void modInts(stack_t **stack, uInt line_number)
 
 	if (num_of_stack_elements < 2 || (*stack)->n == 0)
 	{
+		freeGlobals();
+
 		if (num_of_stack_elements < 2)
 			fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 		else if ((*stack)->n == 0)
 			fprintf(stderr, "L%d: division by zero\n", line_number);
 
-		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

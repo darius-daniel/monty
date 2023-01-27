@@ -10,14 +10,14 @@ void printChar(stack_t **stack, uInt line_number)
 {
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
 		freeGlobals();
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	else if ((*stack)->n > 127 || (*stack)->n < 0)
 	{
-		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		freeGlobals();
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 

@@ -11,8 +11,8 @@ void printInt(stack_t **stack, uInt line_number)
 
 	if (top == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		freeGlobals();
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
