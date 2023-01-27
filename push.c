@@ -93,7 +93,7 @@ void checkFormat(global_t *group, uInt line_number)
 			i = 1;
 		else
 			i = 0;
-		
+
 		while (group->arg[i] != '\0')
 		{
 			if (!isdigit(group->arg[i]))

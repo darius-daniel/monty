@@ -59,7 +59,6 @@ void freeStack(void)
 
 /**
  * freeGroup - frees the memory occupied by a GLOBALS struct
- * @glob_struct: address of the struct
 */
 void freeGlobals(void)
 {

@@ -1,6 +1,6 @@
 #include "monty.h"
 
-/***
+/**
  * printChar - print the char at the top of the stack, followed by a new line
  * @stack: pointer to the top of the stack
  * @line_number: the line number of the opcode in the bytecode file
