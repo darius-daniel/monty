@@ -19,7 +19,14 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	global_vars = allocateMem(sizeof(global_t));
+	global_vars = malloc(sizeof(global_t));
+	if (global_vars == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
+		exit(EXIT_FAILURE);
+	}
+
 	global_vars->arg = NULL;
 	global_vars->opcode = NULL;
 	global_vars->stack = NULL;
@@ -39,7 +46,6 @@ int main(int argc, char **argv)
 													global_vars->p_file);
 		line_number++;
 	}
-
 	freeGlobals();
 	return (EXIT_SUCCESS);
 }

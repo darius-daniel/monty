@@ -27,7 +27,13 @@ void addToStack(stack_t **head, const int n)
 	stack_t *new;
 	stack_t *current = *head;
 
-	new = allocateMem(sizeof(stack_t));
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
+		exit(EXIT_FAILURE);
+	}
 
 	new->n = n;
 	new->next = NULL;
@@ -53,7 +59,13 @@ void addToQueue(stack_t **head, const int n)
 {
 	stack_t *new, *current, *previousNode;
 
-	new = allocateMem(sizeof(stack_t));
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
+		exit(EXIT_FAILURE);
+	}
 
 	new->n = n;
 	new->next = NULL;
