@@ -10,11 +10,10 @@
 void rotateList(stack_t **stack, uInt line_number)
 {
 	stack_t *top, *current;
-	(void)line_number;
 
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't rotl, list too short\n");
+		fprintf(stderr, "L%d: can't rotl, list too short\n", line_number);
 		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
