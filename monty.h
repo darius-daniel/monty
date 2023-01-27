@@ -68,7 +68,7 @@ extern global_t *global_vars;
 
 /* functions for handling and manipulating files */
 FILE *openFile(char *fileName, char *mode);
-void readFileLine(char **line, size_t *bufSize, FILE *fileName)
+void readFileLine(char **line, size_t *bufSize, FILE *fileName);
 
 /* functions that handle tokenisation of strings */
 void createTokensFromString(char *str);
