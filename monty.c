@@ -1,6 +1,6 @@
 #include "monty.h"
 
-GLOBALS *var_group;
+global_t *global_vars;
 
 /**
  * main - Entry Point
@@ -10,7 +10,6 @@ GLOBALS *var_group;
  */
 int main(int argc, char **argv)
 {
-	FILE *p_file;
 	unsigned int line_number = 0;
 	size_t buffer_size = 32;
 
@@ -20,31 +19,27 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	var_group = allocateMem(sizeof(GLOBALS));
+	global_vars = allocateMem(sizeof(global_t));
+	global_vars->arg = NULL;
+	global_vars->opcode = NULL;
+	global_vars->stack = NULL;
+	global_vars->line_buffer = NULL;
 
-	var_group->line_buffer = NULL;
-	var_group->stack = NULL;
-	var_group->arg = NULL;
-	var_group->opcode = NULL;
-
-	p_file = openFile(argv[1], "r");
-	readFileLine(&var_group->line_buffer, &buffer_size, p_file);
+	global_vars->p_file = openFile(argv[1], "r");
+	readFileLine(&global_vars->line_buffer, &buffer_size, global_vars->p_file);
 	line_number++;
 
-	while (!feof(p_file) && p_file != NULL)
+	while (!feof(global_vars->p_file) && global_vars->line_buffer != NULL)
 	{
-		createTokensFromString(var_group->line_buffer);
-		if (var_group->opcode != NULL && var_group->opcode[0] != '#')
-		{
-			callOpcodeFuncs(&var_group->stack, line_number);
-			var_group->opcode = NULL;
-			var_group->arg = NULL;
-		}
-		readFileLine(&var_group->line_buffer, &buffer_size, p_file);
+		createTokensFromString(global_vars->line_buffer);
+		if (global_vars->opcode != NULL && global_vars->opcode[0] != '#')
+			callOpcodeFuncs(&global_vars->stack, line_number);
+
+		readFileLine(&global_vars->line_buffer, &buffer_size,
+													global_vars->p_file);
 		line_number++;
 	}
 
-	fclose(p_file);
-	freeGroup(&var_group);
+	freeGlobals();
 	return (EXIT_SUCCESS);
 }

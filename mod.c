@@ -25,7 +25,7 @@ void modInts(stack_t **stack, uInt line_number)
 		else if ((*stack)->n == 0)
 			fprintf(stderr, "L%d: division by zero\n", line_number);
 
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

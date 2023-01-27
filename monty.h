@@ -46,23 +46,23 @@ typedef struct instruction_s
 
 /**
  * struct global_s - global variable type
- * @line_buffer: a dynamically allocated block of memory containing the
  * line of text read from the bytecode file
+ * @p_file: a pointer to the open file
  * @opcode: the opcode
  * @arg: argument to opcode
- * @stack: pointer to the top of the stack
  *
  * Description: a collection of all the important variables in one place
 */
 typedef struct global_s
 {
+	FILE *p_file;
 	char *line_buffer;
 	char *opcode;
 	char *arg;
 	stack_t *stack;
-} GLOBALS;
+} global_t;
 
-extern GLOBALS *var_group;
+extern global_t *global_vars;
 
 /* ++++++ Helper functions +++++ */
 
@@ -76,12 +76,12 @@ void *allocateMem(size_t size);
 
 /* functions that handle tokenisation of strings */
 void createTokensFromString(char *str);
-void freeStack(stack_t **stack);
-void freeGroup(GLOBALS **glob_struct);
+void freeStack(void);
+void freeGlobals(void);
 
 /* Handling the stack operations */
 void callOpcodeFuncs(stack_t **stack, uInt line_number);
-void checkFormat(GLOBALS *group, uInt line_number);
+void checkFormat(global_t *group, uInt line_number);
 
 /* ++++++ Main Stack Function Prototypes ++++++++ */
 void pushInt(stack_t **stack, uInt line_number);
@@ -96,5 +96,8 @@ void subInts(stack_t **stack,  uInt line_number);
 void divInts(stack_t **stack,  uInt line_number);
 void mulInts(stack_t **stack,  uInt line_number);
 void modInts(stack_t **stack,  uInt line_number);
-void doNothing(stack_t **stack,  uInt line_number);
+void doNothing(stack_t **stack, uInt line_number);
+void printChar(stack_t **stack, uInt line_number);
+void printStr(stack_t **stack, uInt line_number);
+
 #endif

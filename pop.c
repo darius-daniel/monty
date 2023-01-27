@@ -10,11 +10,14 @@ void popInt(stack_t **stack, uInt line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
-
-	if ((*stack)->next == NULL)
+	else if ((*stack)->next == NULL && (*stack)->prev == NULL)
+	{
 		free(*stack);
+		*stack = NULL;
+	}
 	else
 	{
 		*stack = (*stack)->next;

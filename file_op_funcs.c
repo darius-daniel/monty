@@ -14,7 +14,7 @@ FILE *openFile(char *fileName,  char *mode)
 	if (newFile == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", fileName);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,16 +32,13 @@ void readFileLine(char **line, size_t *size, FILE *fileName)
 {
 	int numCharRead;
 
-	if (*line != NULL)
-		free(*line);
-	*line = NULL;
 	numCharRead = getline(line, size, fileName);
 	if (numCharRead == -1)
 	{
 		if (!feof(fileName))
 		{
 			fprintf(stderr, "Error: Can't read from file\n");
-			freeGroup(&var_group);
+			freeGlobals();
 			exit(EXIT_FAILURE);
 		}
 	}

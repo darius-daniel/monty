@@ -32,7 +32,7 @@ void *allocateMem(size_t size)
 	if (newBlock == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
@@ -41,13 +41,12 @@ void *allocateMem(size_t size)
 
 /**
  * freeStack - frees the memory occupied by a stack
- * @stack: pointer to the top of the stack
 */
-void freeStack(stack_t **stack)
+void freeStack(void)
 {
-	stack_t *current = *stack;
+	stack_t *current = global_vars->stack;
 
-	if (*stack != NULL)
+	if (current != NULL)
 	{
 		while (current->next != NULL)
 		{
@@ -62,11 +61,17 @@ void freeStack(stack_t **stack)
  * freeGroup - frees the memory occupied by a GLOBALS struct
  * @glob_struct: address of the struct
 */
-void freeGroup(GLOBALS **glob_struct)
+void freeGlobals(void)
 {
-	free((*glob_struct)->line_buffer);
-	free((*glob_struct)->opcode);
-	free((*glob_struct)->arg);
-	freeStack(&var_group->stack);
-	free(*glob_struct);
+	fclose(global_vars->p_file);
+
+	if (global_vars->line_buffer != NULL)
+		free(global_vars->line_buffer);
+	if (global_vars->arg != NULL)
+		free(global_vars->arg);
+	if (global_vars->opcode != NULL)
+		free(global_vars->opcode);
+
+	freeStack();
+	free(global_vars);
 }

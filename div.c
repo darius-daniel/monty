@@ -20,14 +20,14 @@ void divInts(stack_t **stack, uInt line_number)
 	if (num_of_stack_elements < 2)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
 	if ((*stack)->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

@@ -7,8 +7,9 @@
  */
 void swapInts(stack_t **stack, uInt line_number)
 {
-	uInt numStackElems;
-	stack_t *current, *first, *second;
+	uInt numStackElems = 0;
+	stack_t *current, *second;
+	int temp;
 
 	current = *stack;
 	while (current != NULL)
@@ -20,15 +21,13 @@ void swapInts(stack_t **stack, uInt line_number)
 	if (numStackElems < 2)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
-	first = *stack;
-	second = first->next;
-	first->next = second->next;
-	second->prev = first->prev;
-	first->prev = second;
-	second->next = first;
-	*stack = second;
+	current = *stack;
+	second = current->next;
+	temp = current->n;
+	current->n = second->n;
+	second->n = temp;
 }

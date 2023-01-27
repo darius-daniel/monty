@@ -10,18 +10,20 @@
 void callOpcodeFuncs(stack_t **stack, uInt line_number)
 {
 	int i;
+	char *opcode = global_vars->opcode;
 	instruction_t opcodes[] = {
 		{"push", pushInt}, {"pall", printAll},
 		{"pint", printInt}, {"pop", popInt},
 		{"swap", swapInts}, {"add", addInts},
 		{"sub", subInts}, {"div", divInts},
 		{"mul", mulInts}, {"mod", modInts},
-		{"nop", doNothing},
+		{"nop", doNothing}, {"pchar", printChar},
+		{"pstr", printStr},
 	};
 
 	for (i = 0; opcodes[i].opcode != NULL; i++)
 	{
-		if (strcmp(opcodes[i].opcode, var_group->opcode) == 0)
+		if (strcmp(opcodes[i].opcode, opcode) == 0)
 		{
 			opcodes[i].f(stack, line_number);
 			break;
@@ -30,9 +32,8 @@ void callOpcodeFuncs(stack_t **stack, uInt line_number)
 
 	if (opcodes[i].opcode == NULL)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n",
-					line_number, var_group->opcode);
-		freeGroup(&var_group);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 }

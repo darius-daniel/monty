@@ -8,10 +8,11 @@
 void pushInt(stack_t **stack, uInt line_number)
 {
 	int number;
+	char *arg = global_vars->arg;
 
-	checkFormat(var_group, line_number);
+	checkFormat(global_vars, line_number);
 
-	number = atoi(var_group->arg);
+	number = atoi(arg);
 	addToStack(stack, number);
 }
 
@@ -80,24 +81,26 @@ void addToQueue(stack_t **head, const int n)
  * @group: a struct containing a group of global variables
  * Return: 1 string in var_group can be converted to a num. 0 otherwise
 */
-void checkFormat(GLOBALS *group, uInt line_number)
+void checkFormat(global_t *group, uInt line_number)
 {
-	int i = 0, not_digit = 0;
+	int i, not_digit = 0;
 
-	if (!group->arg)
+	if (group->arg == NULL)
 		not_digit = 1;
 	else
 	{
+		if (group->arg[0] == '-' || group->arg[0] == '+')
+			i = 1;
+		else
+			i = 0;
+		
 		while (group->arg[i] != '\0')
 		{
-			if (i == 0 && (group->arg[i] == '-'))
+			if (!isdigit(group->arg[i]))
 			{
-				i++;
-				continue;
-			}
-
-			if (*group->arg < 48 || *group->arg > 57)
 				not_digit = 1;
+				break;
+			}
 			i++;
 		}
 	}
@@ -105,7 +108,7 @@ void checkFormat(GLOBALS *group, uInt line_number)
 	if (not_digit == 1)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 }

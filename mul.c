@@ -20,7 +20,7 @@ void mulInts(stack_t **stack, uInt line_number)
 	if (num_of_stack_elements < 2)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
-		freeGroup(&var_group);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

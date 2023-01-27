@@ -1,7 +1,7 @@
-push 20 push 10 push 12340
-     push 1000
-nop 145
-      #push      550
-    nop
-
+push 1
+push 2
+push 3
 pall
+add
+pall
+nop
