@@ -22,8 +22,8 @@ int main(int argc, char **argv)
 	global_vars = malloc(sizeof(global_t));
 	if (global_vars == NULL)
 	{
-		freeGlobals();
 		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

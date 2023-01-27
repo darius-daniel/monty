@@ -30,8 +30,8 @@ void addToStack(stack_t **head, const int n)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		freeGlobals();
 		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
@@ -62,8 +62,8 @@ void addToQueue(stack_t **head, const int n)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		freeGlobals();
 		fprintf(stderr, "Error: malloc failed\n");
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 
@@ -119,8 +119,8 @@ void checkFormat(global_t *group, uInt line_number)
 
 	if (not_digit == 1)
 	{
-		freeGlobals();
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 }

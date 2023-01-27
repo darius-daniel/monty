@@ -19,8 +19,8 @@ void addInts(stack_t **stack, uInt line_number)
 
 	if (num_of_stack_elements < 2)
 	{
-		freeGlobals();
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 

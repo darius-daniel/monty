@@ -32,8 +32,8 @@ void callOpcodeFuncs(stack_t **stack, uInt line_number)
 
 	if (opcodes[i].opcode == NULL)
 	{
-		freeGlobals();
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		freeGlobals();
 		exit(EXIT_FAILURE);
 	}
 }

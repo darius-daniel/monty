@@ -32,8 +32,8 @@ void createTokensFromString(char *str)
 		global_vars->opcode = malloc(sizeof(char) * (strlen(token) + 1));
 		if (global_vars->opcode == NULL)
 		{
-			freeGlobals();
 			fprintf(stderr, "Error: malloc failed\n");
+			freeGlobals();
 			exit(EXIT_FAILURE);
 		}
 		strcpy(global_vars->opcode, token);
@@ -45,8 +45,8 @@ void createTokensFromString(char *str)
 		global_vars->arg = malloc(sizeof(char) * (strlen(token) + 1));
 		if (global_vars->arg == NULL)
 		{
-			freeGlobals();
 			fprintf(stderr, "Error: malloc failed\n");
+			freeGlobals();
 			exit(EXIT_FAILURE);
 		}
 		strcpy(global_vars->arg, token);
