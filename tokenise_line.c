@@ -29,14 +29,26 @@ void createTokensFromString(char *str)
 	token = strtok(str, delimiters);
 	if (token != NULL)
 	{
-		global_vars->opcode = allocateMem(sizeof(char) * (strlen(token) + 4));
+		global_vars->opcode = malloc(sizeof(char) * (strlen(token) + 1));
+		if (global_vars->opcode == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			freeGlobals();
+			exit(EXIT_FAILURE);
+		}
 		strcpy(global_vars->opcode, token);
 	}
 
 	token = strtok(NULL, delimiters);
 	if (token != NULL)
 	{
-		global_vars->arg = allocateMem(sizeof(char) * (strlen(token) + 4));
+		global_vars->arg = malloc(sizeof(char) * (strlen(token) + 1));
+		if (global_vars->arg == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			freeGlobals();
+			exit(EXIT_FAILURE);
+		}
 		strcpy(global_vars->arg, token);
 	}
 }
