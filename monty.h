@@ -95,5 +95,6 @@ void modInts(stack_t **stack,  uInt line_number);
 void doNothing(stack_t **stack, uInt line_number);
 void printChar(stack_t **stack, uInt line_number);
 void printStr(stack_t **stack, uInt line_number);
+void rotateList(stack_t **stack, uInt line_number);
 
 #endif

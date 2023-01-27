@@ -18,7 +18,8 @@ void callOpcodeFuncs(stack_t **stack, uInt line_number)
 		{"sub", subInts}, {"div", divInts},
 		{"mul", mulInts}, {"mod", modInts},
 		{"nop", doNothing}, {"pchar", printChar},
-		{"pstr", printStr}, {NULL, NULL},
+		{"pstr", printStr}, {"rotl", rotateList},
+		{NULL, NULL},
 	};
 
 	for (i = 0; opcodes[i].opcode != NULL; i++)
