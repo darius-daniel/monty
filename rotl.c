@@ -11,23 +11,21 @@ void rotateList(stack_t **stack, uInt line_number)
 {
 	stack_t *top, *current;
 
-	if (*stack == NULL)
+	if (*stack != NULL)
 	{
-		fprintf(stderr, "L%d: can't rotl, list too short\n", line_number);
-		freeGlobals();
-		exit(0);
+		if ((*stack)->next != NULL && (*stack)->prev != NULL)
+		{
+			current = *stack;
+			while (current->next != NULL)
+			{
+				current = current->next;
+			}
+
+			top = *stack;
+			*stack = (*stack)->next;
+			top->prev = current;
+			top->next = NULL;
+			current->next = top;
+		}
 	}
-
-	current = *stack;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
-
-	top = *stack;
-	*stack = (*stack)->next;
-	top->prev = current;
-	top->next = NULL;
-	current->next = top;
-
 }
