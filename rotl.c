@@ -10,6 +10,7 @@
 void rotateList(stack_t **stack, uInt line_number)
 {
 	stack_t *top, *current;
+	(void)line_number;
 
 	if (*stack != NULL)
 	{
